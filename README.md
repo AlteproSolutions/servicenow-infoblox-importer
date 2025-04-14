@@ -111,6 +111,75 @@ Ensures strings don't exceed Infoblox's enum length limit (`64` characters).
 
 ---
 
+## ⏰ Scheduling the Script with Cron
+
+You can run the infoblox_gpon_import.py script automatically on a regular schedule using Cron on Unix/Linux systems. Follow these steps to set up the Cron job:
+
+1. Verify Your Environment
+    Python & Dependencies:
+    Ensure that Python 3.6+ and all required libraries are installed.
+    If you’re using a virtual environment, make sure to reference the full path to your environment's Python executable.
+
+    Absolute Paths:
+    Cron jobs use a limited environment, so always use absolute paths for both the Python interpreter and the script.
+
+2. (Optional) Make the Script Executable
+    If you prefer running the script directly (without prefixing with python3), add a shebang at the top of your script:
+
+    ```python
+    #!/usr/bin/env python3
+    ```
+
+    Then, change its permissions to make it executable:
+
+    ```bash
+    chmod +x /path/to/infoblox_gpon_import.py
+    ```
+
+3. Open the Crontab Editor
+    To add a new cron job, open your crontab configuration file using:
+
+    ```bash
+    crontab -e
+    ```
+
+4. Add the Cron Job
+    Add a line in the editor with your desired schedule. For example, to run the script every day at 2:00 AM, you can add:
+
+    ```bash
+    0 2 * * * /usr/bin/python3 /path/to/infoblox_gpon_import.py >> /var/log/infoblox-gpon-import.log 2>&1
+    ```
+
+    Explanation of the Cron Fields:
+
+    0: Minute (0th minute of the hour)
+
+    2: Hour (2 AM)
+
+    *: Every day of the month
+
+    *: Every month
+
+    *: Every day of the week
+
+    If you are using a virtual environment, ensure that you use the Python interpreter from that environment:
+
+    ```bash
+    0 2 * * * /path/to/venv/bin/python /path/to/infoblox_gpon_import.py >> /var/log/infoblox-gpon-import.log 2>&1
+    ```
+
+5. Save and Exit
+    After adding your cron entry, save the file and exit the editor. Cron will automatically pick up the changes, and your script will run at the scheduled times.
+
+6. Verify the Cron Job
+    You can verify your cron jobs by listing them:
+
+    ```bash
+    crontab -l
+    ```
+
+---
+
 ## 🛡️ Notes on Security
 
 - SSL verification is **disabled by default** (`VERIFY_SSL = False`) to allow self-signed certificates. You should enable verification in production environments.
