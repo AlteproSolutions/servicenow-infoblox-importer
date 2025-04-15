@@ -1,7 +1,7 @@
 ---
 #Log dir
 LOG_DIR: "./"
-LOG_LEVEL: INFO # DEBUG, INFO(default), WARNING, ERROR, CRITICAL
+LOG_LEVEL: ERROR # DEBUG, INFO(default), WARNING, ERROR, CRITICAL
 
 #INFOBLOX settings
 INFOBLOX_API_ENDPOINT: "https://infoblox.local/wapi/v2.12"  # Replace with your Infoblox API endpoint
@@ -14,3 +14,6 @@ SERVICENOW_API_USERNAME: admin" # Replace with your ServiceNow username
 SERVICENOW_API_TOKEN: "" # Replace with your ServiceNow API token
 SERVICENOW_API_ENDPOINT: "https://servicenow.com" # Replace with your ServiceNow API endpoint
 SERVICE_NOW_API_LIMIT: 10000 # Max number of records to fetch from ServiceNow
+
+# Proxy settings
+SERVICENOW_PROXY: "" # Proxy settings for ServiceNow API, leave empty if PROXY not needed
