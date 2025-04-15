@@ -192,21 +192,43 @@ def get_snow_locations():
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
+
+    # Nastavení proxy pouze pokud je definována v configu
+    servicenow_proxy = config.get("SERVICENOW_PROXY")
+    proxies = None
+    if servicenow_proxy:
+        proxies = {
+            "http": servicenow_proxy,
+            "https": servicenow_proxy
+        }
+        logger.info("Using proxy for ServiceNow connection: %s", servicenow_proxy)
+    else:
+        logger.info("No proxy defined for ServiceNow connection, connecting directly.")
+
     logger.info("Fetching locations from ServiceNow: %s", url)
     try:
-        response = requests.get(url, auth=(SNOW_API_USERNAME, SNOW_API_TOKEN), headers=headers,
-                                verify=VERIFY_SSL, timeout=30)
+        response = requests.get(
+            url,
+            auth=(SNOW_API_USERNAME, SNOW_API_TOKEN),
+            headers=headers,
+            verify=VERIFY_SSL,
+            timeout=30,
+            proxies=proxies  # None pokud není proxy
+        )
     except Exception as e:
         logger.error("Exception during ServiceNow API request: %s", str(e))
         sys.exit(1)
+
     if response.status_code != 200:
         logger.error("ServiceNow API error. Status: %s, Response: %s", response.status_code, response.text)
         sys.exit(1)
+
     try:
         data = response.json()
     except Exception as e:
         logger.error("Error parsing ServiceNow JSON: %s", str(e))
         sys.exit(1)
+
     results = data.get("result", [])
     locations = {item["name"].strip() for item in results if "name" in item and item["name"]}
     logger.info("Fetched %d locations from ServiceNow.", len(locations))

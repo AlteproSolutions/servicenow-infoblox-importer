@@ -57,6 +57,9 @@ SERVICENOW_API_USERNAME: "admin"
 SERVICENOW_API_TOKEN: "your-servicenow-api-token"
 SERVICENOW_API_ENDPOINT: "https://servicenow.com"
 SERVICE_NOW_API_LIMIT: 10000
+
+# Proxy settings (if needed)
+SERVICENOW_PROXY: "http://proxy.local:8080" # Leave empty if not using proxy
 ```
 
 > ⚠️ Make sure your Infoblox and ServiceNow credentials are properly secured. Avoid committing secrets to version control.
