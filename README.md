@@ -39,7 +39,13 @@ rich
 
 ## ⚙️ Configuration
 
-Create a file called `config.yaml` in the same directory as the script:
+Create a file called `config.yaml` in the same directory as the script (Copy from config_template.yaml):
+
+```bash
+cp config_template.yaml config.yaml
+```
+
+And then fill out the required fields:
 
 ```yaml
 ---
