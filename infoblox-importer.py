@@ -162,7 +162,7 @@ def update_infoblox_ea_values(ea_ref, new_values):
         if len(originals) > 1:
             logger.warning("Duplicate sanitized value '%s' from original values: %s", sanitized, originals)
     
-    sanitized_values = list(sanitized_mapping.keys())
+    sanitized_values = sorted(sanitized_mapping.keys())
     payload = {
         "list_values": [{"value": value} for value in sanitized_values]
     }
@@ -250,7 +250,7 @@ def main():
     logger.info("Current Infoblox EA '%s' allowed values: %s", EXT_ATTR_NAME, current_values)
     
     # Determine new allowed values based solely on ServiceNow data
-    new_values = snow_locations
+    new_values = sorted(snow_locations)
     logger.info("ServiceNow provided %d allowed values: %s", len(new_values), new_values)
     
     # Update Infoblox if values differ
