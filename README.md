@@ -253,9 +253,3 @@ You can run the infoblox_gpon_import.py script automatically on a regular schedu
 ├── requirements.txt
 └── README.md
 ```
-
----
-
-## ✍️ License
-
-MIT License (or your preferred license here)
