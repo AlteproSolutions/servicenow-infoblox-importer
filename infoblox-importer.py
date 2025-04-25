@@ -84,7 +84,7 @@ else:
     SNOW_INSTANCE_URL = SERVICENOW_API_ENDPOINT
 SNOW_API_USERNAME = config.get("SERVICENOW_API_USERNAME")
 SNOW_API_TOKEN = config.get("SERVICENOW_API_TOKEN")
-SNOW_CMN_LOCATION_ENDPOINT = f"/api/now/table/cmn_location?sysparm_query=cmn_location_typeINcampus&sysparm_limit={config.get('SERVICE_NOW_API_LIMIT')}&sysparm_fields=name"
+SNOW_CMN_LOCATION_ENDPOINT = f"/api/now/table/cmn_location?sysparm_query=cmn_location_typeINcountry,city,campus&sysparm_limit={config.get('SERVICE_NOW_API_LIMIT')}&sysparm_fields=name"
 
 # Infoblox settings
 INFOBLOX_API_ENDPOINT = config.get("INFOBLOX_API_ENDPOINT")
